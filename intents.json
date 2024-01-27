@@ -1,0 +1,91 @@
+{"intents": [
+  {"tag": "greeting",
+    "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up", "Hey", "greetings"],
+    "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?"],
+    "context_set": ""
+  },
+  {"tag": "goodbye",
+    "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day", "bye", "cao", "see ya"],
+    "responses": ["Sad to see you go :(","Have a good day bye","Talk to you later", "Goodbye!"],
+    "context_set": ""
+  },
+  {"tag": "programming",
+    "patterns": ["What is progamming?", "What is coding?", "Tell me about programming", "Tell me about coding", "What is software development?"],
+    "responses": ["Programming, coding or software development, means writing computer code to automate tasks."],
+    "context_set": ""
+  },
+  {"tag": "resource",
+    "patterns": ["Where can I learn to code?", "Best way to learn to code", "How can I learn programming", "Good programming resources", "Can you recommend good coding resources?"],
+    "responses": ["There are many resources available for you to learn coding like learning from Online Tech articles, Online Podcasts, Communities or Groups of Coders on Social Media and other platforms, Youtube Videos, Stackoverflow, Github, Self-Designed Projects and Portfolios, Online Boot Camps, Online Hackathons, etc"],
+    "context_set": ""
+  },
+  {"tag": "Creators",
+    "patterns": ["Who created you?","You was developed by ?","Your creators name?","Who developed you"],
+    "responses": ["There are 6 developers behind me.They are from India who are :\nRahul (Project Head)\nLingeswaran (Chatbot Script Programmer)\nSasidharan (Technical SUpport) \nSunilPrasanth (Technical SUpport) \nKishore (Designer) \nRitheesh (Technical Operator)"],
+    "context_set": ""
+  },
+  {"tag": "Purpose",
+    "patterns": ["Why you was build ?","Why you was developed ?","Your purpose ?","your job ?"],
+    "responses": ["I'm Ultron.My job is to interacts with a human through written language.\nIam only able to recognize questions and comments when they match the keywords selected by the chatbot’s programmer.\nAn artificial intelligence bot, on the other hand, employs machine learning and natural language processing to respond to human input even when it deviates from a pre-programmed script"],
+    "context_set": ""
+  },
+  {"tag": "Chatbox Name",
+    "patterns": ["What is your name ?","Your name ?","Who are you ?"],
+    "responses": ["I'm Ultron an AI - ChatBox"],
+    "context_set": ""
+  },
+  {"tag": "Recent Trends",
+    "patterns": ["What i can learn in 2024 ?","Which has best domain scope in future ?","Give me some domains for learning","What are the market trends in computer science?"],
+    "responses": ["The following Domains are best to learn in future : \nGame Development \nWeb Development \nBlockchain \nData Science \nArtificial Intelligence (AI) and Machine Learning (ML)\nMobile App Development\nCybersecurity\nCloud Computing"],
+    "context_set": ""
+  },
+  {"tag": "AI",
+    "patterns": ["What is ai ? ","Artificial intelligence ?","What is ment by ai ?"],
+    "responses": ["Artificial intelligence is the simulation of human intelligence processes by machines, especially computer systems.\nSpecific applications of AI include expert systems, natural language processing, speech recognition and machine vision."],
+    "context_set": ""
+  },
+  {"tag": "joke",
+    "patterns": ["tell me a joke ","i am boring ","Do you have humor ?"],
+    "responses": ["What month is the shortest of the year?\nMay, it only has three letters."],
+    "context_set": ""
+  },
+  {"tag": "Education",
+    "patterns": ["is education is important ?","tell me about education","education is it necessary ?"],
+    "responses": ["Education helps a person to get knowledge and improve confidence in life. It can help you improve your career and your personal growth.\nAn educated person can become a great citizen in society. It helps you to take the right decisions in life so its important for every human beings"],
+    "context_set": ""
+  },
+  {"tag": "cyber",
+    "patterns": ["what is cyber-security?","cybersecurity means","why cybersecurity need ?"],
+    "responses": ["Cybersecurity, or information security, is a multidisciplinary field that involves the protection of computer systems, networks, and data from theft, damage, unauthorized access, and other cyber threats.\nIt encompasses a wide range of practices, technologies, and processes designed to ensure the confidentiality, integrity, and availability of information in the digital realm."],
+    "context_set": ""
+  },
+  {"tag": "CIA",
+    "patterns": ["what is cia triad?","cia means","cia triad ?"],
+    "responses": ["The CIA Triad is a fundamental concept in cybersecurity\nRepresenting the three core principles of information security: Confidentiality, Integrity, and Availability.\nThese principles serve as a framework for designing and implementing security measures to protect digital assets. \nConfidentiality ensures that information is accessible only to authorized individuals, \nintegrity ensures the accuracy and trustworthiness of data, and availability ensures that information and systems are accessible when needed"],
+    "context_set": ""
+  },
+  {"tag": "version",
+    "patterns": ["what is your version?","your version ?","tell me about your version?"],
+    "responses": ["I was lastly updated on JAN 2024 my version is 0.1 :)"],
+    "context_set": ""
+  },
+  {"tag": "scope",
+    "patterns": ["cybersecurity scope?","what about the scope of cybersecurity?","I need scope of cybersecurity?"],
+    "responses": ["The scope of cybersecurity is vast and continually expanding as technology evolves.\nIt encompasses the protection of computer systems, networks, and data from a wide range of cyber threats, including hacking, malware, ransomware, and other malicious activities.\nWith the increasing digitization of information and the growing reliance on interconnected technologies, cybersecurity is crucial across various sectors, including finance, healthcare, government, and more."],
+    "context_set": ""
+  },
+  {"tag": "Hackathon",
+    "patterns": ["For which hackathon you was created?","which hackathon you belongs too?","are your created for what hackathon?"],
+    "responses": ["I was created for MLH'S - Month Long Hackathon"],
+    "context_set": ""
+  },
+  {"tag": "learning_site",
+    "patterns": ["List me some site for education","give me site for education?","List the education sites "],
+    "responses": ["Here are some popular ones:\nCoursera: Coursera provides online courses, specializations, and degrees in collaboration with universities and organizations worldwide. \nedX: Similar to Coursera, edX offers online courses from universities and institutions around the world. It covers diverse subjects and provides verified certificates.\nKhan Academy: Khan Academy offers free online courses, lessons, and practice in various subjects, particularly in mathematics, science, economics,etc\nUdacity: Udacity focuses on providing online courses and nanodegree programs with a practical, project-based approach. It covers technology-related fields.\nCodecademy: Codecademy is an interactive learning platform that offers coding courses in various programming languages. It's suitable for beginners.\nLinkedIn Learning: Formerly known as Lynda.com, LinkedIn Learning offers a vast library of video courses covering a wide range of topics, including technology, business, creative skills, and more.\nfreeCodeCamp: freeCodeCamp is a nonprofit organization that offers free coding lessons and projects."],
+    "context_set": ""
+  }
+]
+}
+
+
+
