@@ -13,14 +13,6 @@ Welcome to the Chatbot Project! This repository contains a chatbot model that ca
 - `chatbot.py`: Script to interact with the trained model.
 - `requirements.txt`: List of required Python libraries.
 
-## 📦 Installation
-
-To get started, clone the repository and install the required packages:
-
-```bash
-git clone https://github.com/yourusername/your-chatbot-repo.git
-cd your-chatbot-repo
-pip install -r requirements.txt
 
 
 📖 How It Works
@@ -35,3 +27,13 @@ Prediction: In chatbot.py, user inputs are processed using the same bag-of-words
 
 🔄 Updating Intents
 You can easily extend the chatbot's capabilities by adding new intents or modifying existing ones in the intents.json file. Make sure to retrain the model after any changes.
+
+## 📦 Installation
+
+To get started, clone the repository and install the required packages:
+
+```bash
+git clone https://github.com/yourusername/your-chatbot-repo.git
+cd your-chatbot-repo
+pip install -r requirements.txt
+
