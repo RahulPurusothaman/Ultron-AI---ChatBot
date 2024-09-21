@@ -14,7 +14,6 @@ Welcome to the Chatbot Project! This repository contains a chatbot model that ca
 - `requirements.txt`: List of required Python libraries.
 
 
-
 📖 How It Works
 Data Processing: The training.py script reads intents.json, tokenizes the user patterns, and creates a bag-of-words representation of each input. It also prepares the output labels for each intent.
 
@@ -27,6 +26,22 @@ Prediction: In chatbot.py, user inputs are processed using the same bag-of-words
 
 🔄 Updating Intents
 You can easily extend the chatbot's capabilities by adding new intents or modifying existing ones in the intents.json file. Make sure to retrain the model after any changes.
+
+📋 Usage
+Train the Model: Run the following command to train the chatbot model:
+
+bash
+Copy code
+python training.py
+This will create chatbot_model.h5, words.pkl, and classes.pkl.
+
+Start the Chatbot: Once the model is trained, run the chatbot using:
+
+bash
+Copy code
+python chatbot.py
+You can now start chatting with the bot! Type your message and hit enter.
+
 
 ## 📦 Installation
 
