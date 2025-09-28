@@ -1,5 +1,5 @@
 tensorflow
 nltk
 numpy
-pickle5 (if using Python 3.8+)
+pickle5 
 json
