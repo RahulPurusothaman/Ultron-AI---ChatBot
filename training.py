@@ -10,10 +10,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 import wandb
-from wandb.integration.keras import WandbCallback
+from wandb.integration.keras import WandbMetricsLogger  # <-- updated callback
+from nltk.tokenize import TreebankWordTokenizer
 
 # ---------------- SETUP ---------------- #
 lemmatizer = WordNetLemmatizer()
+tokenizer = TreebankWordTokenizer()
 
 # make results folder if not exists
 os.makedirs("results/plots", exist_ok=True)
@@ -39,7 +41,7 @@ ignoreLetters = ['?', '!', '.', ',']
 
 for intent in intents['intents']:
     for pattern in intent['patterns']:
-        wordList = nltk.word_tokenize(pattern)
+        wordList = tokenizer.tokenize(pattern)
         words.extend(wordList)
         documents.append((wordList, intent['tag']))
         if intent['tag'] not in classes:
@@ -90,7 +92,7 @@ history = model.fit(
     batch_size=config.batch_size,
     verbose=1,
     validation_split=0.2,
-    callbacks=[WandbCallback()]
+    callbacks=[WandbMetricsLogger()]  # <-- new callback
 )
 
 model.save('chatbot_model.h5')
