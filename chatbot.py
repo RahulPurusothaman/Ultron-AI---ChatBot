@@ -25,7 +25,6 @@ st.title("🧠 Artificial Neural Network Demo")
 st.markdown("""
 This demo showcases **how an AI model processes text**.  
 **Stage 1:** Simple ANN with Bag of Words for intent recognition.  
-Later stages will show embeddings, sequence models, transformers, and generative AI.
 """)
 
 # ---------------- LOAD DATA ---------------- #
