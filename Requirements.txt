@@ -3,3 +3,7 @@ nltk
 numpy
 pickle5 
 json
+wandb
+scikit-learn
+matplotlib
+seaborn
