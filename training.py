@@ -10,18 +10,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 import wandb
-from wandb.integration.keras import WandbMetricsLogger  # <-- updated callback
+from wandb.integration.keras import WandbMetricsLogger
 from nltk.tokenize import TreebankWordTokenizer
 
 # ---------------- SETUP ---------------- #
 lemmatizer = WordNetLemmatizer()
 tokenizer = TreebankWordTokenizer()
 
-# make results folder if not exists
+# Make results folder if not exists
 os.makedirs("results/plots", exist_ok=True)
 
-# init wandb
-wandb.init(project="ANN", config={
+# Init W&B
+wandb.init(project="Artificial Neural Network", config={
     "learning_rate": 0.01,
     "epochs": 200,
     "batch_size": 5,
@@ -34,9 +34,7 @@ config = wandb.config
 # ---------------- LOAD DATA ---------------- #
 intents = json.loads(open('intents.json').read())
 
-words = []
-classes = []
-documents = []
+words, classes, documents = [], [], []
 ignoreLetters = ['?', '!', '.', ',']
 
 for intent in intents['intents']:
@@ -47,22 +45,18 @@ for intent in intents['intents']:
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
-words = [lemmatizer.lemmatize(w.lower()) for w in words if w not in ignoreLetters]
-words = sorted(set(words))
+words = sorted(set([lemmatizer.lemmatize(w.lower()) for w in words if w not in ignoreLetters]))
 classes = sorted(set(classes))
 
 pickle.dump(words, open('words.pkl', 'wb'))
 pickle.dump(classes, open('classes.pkl', 'wb'))
 
+# ---------------- PREPARE TRAINING DATA ---------------- #
 training = []
 outputEmpty = [0] * len(classes)
 
 for document in documents:
-    bag = []
-    wordPatterns = [lemmatizer.lemmatize(w.lower()) for w in document[0]]
-    for word in words:
-        bag.append(1 if word in wordPatterns else 0)
-
+    bag = [1 if lemmatizer.lemmatize(w.lower()) in [lemmatizer.lemmatize(w.lower()) for w in document[0]] else 0 for w in words]
     outputRow = list(outputEmpty)
     outputRow[classes.index(document[1])] = 1
     training.append(bag + outputRow)
@@ -73,7 +67,7 @@ training = np.array(training)
 trainX = training[:, :len(words)]
 trainY = training[:, len(words):]
 
-# ---------------- MODEL ---------------- #
+# ---------------- BUILD MODEL ---------------- #
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(128, input_shape=(len(trainX[0]),), activation='relu', name="dense_1"),
     tf.keras.layers.Dropout(0.5, name="dropout_1"),
@@ -86,27 +80,35 @@ sgd = tf.keras.optimizers.SGD(learning_rate=config.learning_rate, momentum=0.9, 
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 # ---------------- TRAINING ---------------- #
+# Add EarlyStopping to reduce overfitting
+early_stop = tf.keras.callbacks.EarlyStopping(
+    monitor='val_loss',
+    patience=15,
+    restore_best_weights=True
+)
+
 history = model.fit(
     trainX, trainY,
     epochs=config.epochs,
     batch_size=config.batch_size,
     verbose=1,
     validation_split=0.2,
-    callbacks=[WandbMetricsLogger()]  # <-- new callback
+    callbacks=[WandbMetricsLogger(), early_stop]
 )
 
+# Save the trained model
 model.save('chatbot_model.h5')
 print("✅ Model Training Complete & Saved")
 
 # ---------------- VISUALIZATION ---------------- #
-# Loss curve
+# Loss Curve
 plt.plot(history.history['loss'], label='train_loss')
 plt.plot(history.history['val_loss'], label='val_loss')
 plt.legend(); plt.title("Loss Curve")
 plt.savefig("results/plots/loss_curve.png")
 plt.show()
 
-# Accuracy curve
+# Accuracy Curve
 plt.plot(history.history['accuracy'], label='train_acc')
 plt.plot(history.history['val_accuracy'], label='val_acc')
 plt.legend(); plt.title("Accuracy Curve")
@@ -125,7 +127,7 @@ plt.title("Confusion Matrix")
 plt.savefig("results/plots/confusion_matrix.png")
 plt.show()
 
-# log images to wandb
+# Log images to W&B
 wandb.log({
     "loss_curve": wandb.Image("results/plots/loss_curve.png"),
     "accuracy_curve": wandb.Image("results/plots/accuracy_curve.png"),
