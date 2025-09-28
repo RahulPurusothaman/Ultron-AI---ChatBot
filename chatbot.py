@@ -14,11 +14,26 @@ st.set_page_config(page_title="Artificial Neural Network Demo", layout="wide")
 lemmatizer = WordNetLemmatizer()
 tokenizer = TreebankWordTokenizer()
 
-# Load data and model
-intents = json.loads(open('intents.json').read())
-words = pickle.load(open('model/words.pkl', 'rb'))
-classes = pickle.load(open('model/classes.pkl', 'rb'))
-model = load_model('model/chatbot_model.h5')
+# Sidebar: Stage selection
+stage = st.sidebar.selectbox(
+    "Select AI Stage",
+    ["Stage 1 – ANN + Bag of Words", "Stage 2 – ANN + Embeddings",
+     "Stage 3 – RNN/LSTM/GRU", "Stage 4 – Transformers", "Stage 5 – Generative"]
+)
+
+st.title("🧠 Artificial Neural Network Demo")
+st.markdown("""
+This demo showcases **how an AI model processes text**.  
+**Stage 1:** Simple ANN with Bag of Words for intent recognition.  
+Later stages will show embeddings, sequence models, transformers, and generative AI.
+""")
+
+# ---------------- LOAD DATA ---------------- #
+if stage == "Stage 1 – ANN + Bag of Words":
+    intents = json.loads(open('intents.json').read())
+    words = pickle.load(open('model/words.pkl', 'rb'))
+    classes = pickle.load(open('model/classes.pkl', 'rb'))
+    model = load_model('model/chatbot_model.h5')
 
 # ---------------- FUNCTIONS ---------------- #
 def clean_up_sentence(sentence):
@@ -61,30 +76,26 @@ def get_response(intents_list, intents_json):
     return result
 
 # ---------------- STREAMLIT UI ---------------- #
-st.title("🧠 Artificial Neural Network Demo")
-st.markdown("""
-Welcome! This demo showcases **how an Artificial Neural Network (ANN)** processes text to recognize intents.
-It is **not a chatbot** — the focus is on the **ANN model** itself and its predictions.
-""")
-
 st.markdown("### Enter a sentence to see how the ANN interprets it:")
+user_input = st.text_input("Input:")
 
-# Session state
+# Initialize session state for history
 if "history" not in st.session_state:
     st.session_state.history = []
 
-user_input = st.text_input("Input:")
-
+# Predict on button click
 if st.button("Predict") and user_input:
-    ints, resp_time = predict_class(user_input)
-    res = get_response(ints, intents)
+    if stage == "Stage 1 – ANN + Bag of Words":
+        ints, resp_time = predict_class(user_input)
+        res = get_response(ints, intents)
 
-    # Save to history
-    st.session_state.history.append({
-        "input": user_input,
-        "prediction": res,
-        "response_time": f"{resp_time:.4f} seconds"
-    })
+        st.session_state.history.append({
+            "input": user_input,
+            "prediction": res,
+            "response_time": f"{resp_time:.4f} seconds"
+        })
+    else:
+        st.warning(f"{stage} is not implemented yet. Stage 1 is currently active.")
 
 # Display history
 st.markdown("### ANN Prediction History:")
